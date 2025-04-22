@@ -70,7 +70,7 @@
     <jolokia.version>2.2.8</jolokia.version>
 
     <!-- Other versions -->
-    <servlet-api.version>5.0.0</servlet-api.version>
+    <servlet-api.version>6.1.0</servlet-api.version>
     <jetty.version>11.0.25</jetty.version>
 
     <!-- Plugin versions -->
