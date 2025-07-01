@@ -80,7 +80,7 @@
     <jetty.version>11.0.25</jetty.version>
 
     <!-- Plugin versions -->
-    <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
+    <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
     <compiler-plugin.version>3.14.0</compiler-plugin.version>
     <gpg-plugin.version>3.2.7</gpg-plugin.version>
     <javadoc-plugin.version>3.11.2</javadoc-plugin.version>
