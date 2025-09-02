@@ -77,7 +77,7 @@
 
     <!-- Other versions -->
     <servlet-api.version>5.0.0</servlet-api.version>
-    <jetty.version>11.0.25</jetty.version>
+    <jetty.version>11.0.26</jetty.version>
 
     <!-- Plugin versions -->
     <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
