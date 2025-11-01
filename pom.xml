@@ -73,7 +73,7 @@
     <quarkiverse-mcp.version>1.6.0</quarkiverse-mcp.version>
 
     <!-- Jolokia version -->
-    <jolokia.version>2.3.0</jolokia.version>
+    <jolokia.version>2.4.1</jolokia.version>
 
     <!-- Other versions -->
     <servlet-api.version>5.0.0</servlet-api.version>
