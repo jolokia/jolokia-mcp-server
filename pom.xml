@@ -69,7 +69,7 @@
     <!-- Quarkus -->
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.28.2</quarkus.platform.version>
+    <quarkus.platform.version>3.29.0</quarkus.platform.version>
     <quarkiverse-mcp.version>1.6.0</quarkiverse-mcp.version>
 
     <!-- Jolokia version -->
