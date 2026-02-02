@@ -13,3 +13,5 @@ download-runner:
 	curl -LO https://repo1.maven.org/maven2/org/jolokia/mcp/jolokia-mcp-server/${RELEASE_VERSION}/jolokia-mcp-server-${RELEASE_VERSION}-runner.jar.asc
 	curl -LO https://repo1.maven.org/maven2/org/jolokia/mcp/jolokia-mcp-server/${RELEASE_VERSION}/jolokia-mcp-server-${RELEASE_VERSION}-runner.jar.md5
 	curl -LO https://repo1.maven.org/maven2/org/jolokia/mcp/jolokia-mcp-server/${RELEASE_VERSION}/jolokia-mcp-server-${RELEASE_VERSION}-runner.jar.sha1
+	curl -LO https://repo1.maven.org/maven2/org/jolokia/mcp/jolokia-mcp-server/${RELEASE_VERSION}/jolokia-mcp-server-${RELEASE_VERSION}-runner.jar.sha256
+	curl -LO https://repo1.maven.org/maven2/org/jolokia/mcp/jolokia-mcp-server/${RELEASE_VERSION}/jolokia-mcp-server-${RELEASE_VERSION}-runner.jar.sha512
