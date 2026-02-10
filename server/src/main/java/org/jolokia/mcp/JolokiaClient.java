@@ -25,6 +25,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jolokia.client.EscapeUtil;
 import org.jolokia.client.exception.JolokiaException;
+import org.jolokia.client.request.HttpMethod;
 import org.jolokia.client.request.JolokiaExecRequest;
 import org.jolokia.client.request.JolokiaListRequest;
 import org.jolokia.client.request.JolokiaReadRequest;
@@ -41,9 +42,14 @@ public class JolokiaClient implements JolokiaService {
     org.jolokia.client.JolokiaClient jolokiaClient;
     MBeanListCache mbeanListCache;
 
+    private Optional<HttpMethod> preferredHttpMethod = Optional.empty();
+
     public JolokiaClient(@ConfigProperty(name = "jolokia.mcp.url", defaultValue = "http://localhost:8778/jolokia")
-                         String jolokiaUrl) {
+                         String jolokiaUrl,
+                         @ConfigProperty(name = "jolokia.mcp.preferred-http-method")
+                         Optional<String> preferredHttpMethod) {
         jolokiaClient = new org.jolokia.client.JolokiaClientBuilder().url(jolokiaUrl).build();
+        preferredHttpMethod.ifPresent(this::setPreferredHttpMethod);
     }
 
     public List<String> listMBeans() throws JolokiaException {
@@ -79,26 +85,42 @@ public class JolokiaClient implements JolokiaService {
 
     JSONObject list(String path) throws JolokiaException {
         JolokiaListRequest req = new JolokiaListRequest(path);
+        preferredHttpMethod.ifPresent(req::setPreferredHttpMethod);
         JolokiaListResponse resp = jolokiaClient.execute(req);
         return resp.getValue();
     }
 
     public Optional<Object> read(String mbean, String attr) throws JolokiaException, MalformedObjectNameException {
         JolokiaReadRequest req = new JolokiaReadRequest(mbean, attr);
+        preferredHttpMethod.ifPresent(req::setPreferredHttpMethod);
         JolokiaReadResponse resp = jolokiaClient.execute(req);
         return Optional.ofNullable(resp.getValue());
     }
 
     public Optional<Object> write(String mbean, String attr, Object value) throws JolokiaException, MalformedObjectNameException {
         JolokiaWriteRequest req = new JolokiaWriteRequest(mbean, attr, value);
+        preferredHttpMethod.ifPresent(req::setPreferredHttpMethod);
         JolokiaWriteResponse resp = jolokiaClient.execute(req);
         return Optional.ofNullable(resp.getValue());
     }
 
     public Optional<Object> exec(String mbean, String op, Object... args) throws JolokiaException, MalformedObjectNameException {
         JolokiaExecRequest req = new JolokiaExecRequest(mbean, op, args);
+        preferredHttpMethod.ifPresent(req::setPreferredHttpMethod);
         JolokiaExecResponse resp = jolokiaClient.execute(req);
         return Optional.ofNullable(resp.getValue());
+    }
+
+    public Optional<HttpMethod> getPreferredHttpMethod() {
+        return preferredHttpMethod;
+    }
+
+    public void setPreferredHttpMethod(String preferredHttpMethod) {
+        this.preferredHttpMethod = switch (preferredHttpMethod.toUpperCase()) {
+            case "GET" -> Optional.of(HttpMethod.GET);
+            case "POST" -> Optional.of(HttpMethod.POST);
+            default -> Optional.empty();
+        };
     }
 }
 
