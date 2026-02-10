@@ -178,6 +178,7 @@ The system properties that are relevant to the MCP server:
 | `quarkus.http.port` | `8080` | (SSE) The port for the SSE endpoint |
 | `quarkus.mcp.server.sse.root-path` | `mcp` | (SSE) The root path for the SSE endpoint (`http://localhost:8080/mcp/sse`) |
 | `jolokia.mcp.url` | `http://localhost:8778/jolokia` | Equivalent to the positional parameter |
+| `jolokia.mcp.preferred-http-method` | Not set | Preferred HTTP method for Jolokia requests (`GET` or `POST`) |
 
 ## Build
 

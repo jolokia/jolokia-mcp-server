@@ -16,12 +16,18 @@
  */
 package org.jolokia.mcp;
 
+import java.util.Optional;
+import java.util.stream.Stream;
 import jakarta.inject.Inject;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.TestProfile;
+import org.jolokia.client.request.HttpMethod;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.jolokia.mcp.JolokiaClient.toPath;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -67,5 +73,25 @@ class JolokiaClientTest {
     @Test
     void testExec() {
         assertDoesNotThrow(() -> jolokiaClient.exec("java.lang:type=Memory", "gc"));
+    }
+
+    @ParameterizedTest
+    @MethodSource("providePreferredHttpMethodTestCases")
+    void testPreferredHttpMethod(String config, Optional<HttpMethod> expected) throws Exception {
+        if (!"DEFAULT".equalsIgnoreCase(config)) {
+            jolokiaClient.setPreferredHttpMethod(config);
+        }
+        assertEquals(expected, jolokiaClient.getPreferredHttpMethod());
+    }
+
+    static Stream<Arguments> providePreferredHttpMethodTestCases() {
+        return Stream.of(
+            Arguments.of("DEFAULT", Optional.empty()),
+            Arguments.of("GET", Optional.of(HttpMethod.GET)),
+            Arguments.of("get", Optional.of(HttpMethod.GET)),
+            Arguments.of("POST", Optional.of(HttpMethod.POST)),
+            Arguments.of("post", Optional.of(HttpMethod.POST)),
+            Arguments.of("INVALID", Optional.empty())
+        );
     }
 }
