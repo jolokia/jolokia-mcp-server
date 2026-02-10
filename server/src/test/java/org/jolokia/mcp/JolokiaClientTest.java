@@ -55,6 +55,20 @@ class JolokiaClientTest {
     }
 
     @Test
+    void testListOperations() throws Exception {
+        var operations = jolokiaClient.listOperations("java.lang:type=Memory");
+        assertNotNull(operations);
+        assertFalse(operations.isEmpty());
+    }
+
+    @Test
+    void testListAttributes() throws Exception {
+        var attributes = jolokiaClient.listAttributes("java.lang:type=Memory");
+        assertNotNull(attributes);
+        assertFalse(attributes.isEmpty());
+    }
+
+    @Test
     void testRead() throws Exception {
         assertNotNull(jolokiaClient.read("java.lang:type=OperatingSystem", "Name").orElse(null));
     }
