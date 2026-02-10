@@ -76,6 +76,10 @@ public class JolokiaClient implements JolokiaService {
 
     JSONObject getFromMBean(String mbean, String key) throws JolokiaException {
         JSONObject mbeanInfo = list(toPath(mbean));
+        // expected to be /list/{domain}/{key-list}/{specific-key}
+        for (String keyParent : mbean.split(":", 2)) {
+            mbeanInfo = (JSONObject) mbeanInfo.getOrDefault(keyParent, mbeanInfo);
+        }
         return (JSONObject) mbeanInfo.getOrDefault(key, new JSONObject());
     }
 
