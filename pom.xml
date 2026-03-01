@@ -87,7 +87,7 @@
     <release-plugin.version>3.3.1</release-plugin.version>
     <shade-plugin.version>3.6.0</shade-plugin.version>
     <source-plugin.version>3.4.0</source-plugin.version>
-    <surefire-plugin.version>3.5.4</surefire-plugin.version>
+    <surefire-plugin.version>3.5.5</surefire-plugin.version>
   </properties>
 
   <dependencyManagement>
