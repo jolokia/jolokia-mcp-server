@@ -21,8 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.quarkus.runtime.Quarkus;
+import org.jolokia.core.util.EscapeUtil;
 import org.jolokia.mcp.JolokiaMcpConfigSource;
-import org.jolokia.server.core.util.EscapeUtil;
 
 public class JvmAgent {
 
