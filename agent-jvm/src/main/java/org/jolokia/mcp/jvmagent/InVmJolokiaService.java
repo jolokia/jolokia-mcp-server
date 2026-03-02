@@ -26,25 +26,26 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 import jakarta.enterprise.context.ApplicationScoped;
 
+import org.jolokia.core.api.LogHandler;
+import org.jolokia.core.util.ClassUtil;
+import org.jolokia.core.util.LocalServiceFactory;
 import org.jolokia.json.JSONObject;
 import org.jolokia.mcp.JolokiaService;
 import org.jolokia.server.core.config.ConfigKey;
 import org.jolokia.server.core.config.Configuration;
 import org.jolokia.server.core.config.StaticConfiguration;
 import org.jolokia.server.core.detector.ServerDetectorLookup;
+import org.jolokia.server.core.request.BadRequestException;
 import org.jolokia.server.core.request.EmptyResponseException;
 import org.jolokia.server.core.restrictor.RestrictorFactory;
 import org.jolokia.server.core.service.JolokiaServiceManagerFactory;
 import org.jolokia.server.core.service.api.JolokiaContext;
 import org.jolokia.server.core.service.api.JolokiaServiceManager;
-import org.jolokia.server.core.service.api.LogHandler;
 import org.jolokia.server.core.service.api.Restrictor;
 import org.jolokia.server.core.service.impl.CachingServerDetectorLookup;
 import org.jolokia.server.core.service.impl.ClasspathServerDetectorLookup;
 import org.jolokia.server.core.service.impl.ClasspathServiceCreator;
 import org.jolokia.server.core.service.impl.StdoutLogHandler;
-import org.jolokia.server.core.util.ClassUtil;
-import org.jolokia.server.core.util.LocalServiceFactory;
 import org.jolokia.server.core.vm.InVmRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,7 +126,7 @@ public class InVmJolokiaService implements JolokiaService {
     }
 
     @Override
-    public List<String> listMBeans() throws EmptyResponseException {
+    public List<String> listMBeans() throws EmptyResponseException, BadRequestException {
         JSONObject response = requestHandler.handleList(null);
         JSONObject domains = (JSONObject) response.get("value");
         LOG.debug("listMBeans: {}", domains);
@@ -136,16 +137,16 @@ public class InVmJolokiaService implements JolokiaService {
     }
 
     @Override
-    public JSONObject listOperations(String mbean) throws EmptyResponseException {
+    public JSONObject listOperations(String mbean) throws EmptyResponseException, BadRequestException {
         return getFromMBean(mbean, "op");
     }
 
     @Override
-    public JSONObject listAttributes(String mbean) throws EmptyResponseException {
+    public JSONObject listAttributes(String mbean) throws EmptyResponseException, BadRequestException {
         return getFromMBean(mbean, "attr");
     }
 
-    private JSONObject getFromMBean(String mbean, String key) throws EmptyResponseException {
+    private JSONObject getFromMBean(String mbean, String key) throws EmptyResponseException, BadRequestException {
         JSONObject response = requestHandler.handleList(mbean);
         JSONObject mbeanInfo = (JSONObject) response.get("value");
         LOG.debug("getFromMBean( {}, {} ): {}", mbean, key, mbeanInfo);
@@ -153,21 +154,21 @@ public class InVmJolokiaService implements JolokiaService {
     }
 
     @Override
-    public Optional<Object> read(String mbean, String attr) throws EmptyResponseException {
+    public Optional<Object> read(String mbean, String attr) throws EmptyResponseException, BadRequestException {
         JSONObject response = requestHandler.handleRead(mbean, attr);
         LOG.debug("read( {}, {} ): {}", mbean, attr, response);
         return Optional.ofNullable(response.get("value"));
     }
 
     @Override
-    public Optional<Object> write(String mbean, String attr, Object value) throws EmptyResponseException {
+    public Optional<Object> write(String mbean, String attr, Object value) throws EmptyResponseException, BadRequestException {
         JSONObject response = requestHandler.handleWrite(mbean, attr, value);
         LOG.debug("write( {}, {}, {} ): {}", mbean, attr, value, response);
         return Optional.ofNullable(response.get("value"));
     }
 
     @Override
-    public Optional<Object> exec(String mbean, String op, Object... args) throws EmptyResponseException {
+    public Optional<Object> exec(String mbean, String op, Object... args) throws EmptyResponseException, BadRequestException {
         JSONObject response = requestHandler.handleExec(mbean, op, args);
         LOG.debug("exec( {}, {}, {} ): {}", mbean, op, args, response);
         return Optional.ofNullable(response.get("value"));
