@@ -171,7 +171,6 @@ The HTTP transport endpoint by default launches at <http://localhost:8080/mcp>.
 | `--http` | `false` (stdio) | Enable HTTP transport |
 | `--sse` | `false` (stdio) | Deprecated. Use `--http` |
 | `--port=<number>` | `8080` | The port for the HTTP endpoint. Equivalent to `-Dquarkus.http.port=<number>`. When the option is set, HTTP is always enabled |
-| `--root=<path>` | `mcp` | The root path for the HTTP endpoint. Equivalent to `-Dquarkus.mcp.server.http.root-path=<path>`. When the option is set, HTTP is always enabled |
 | `--method=<GET\|POST>` | | Preferred HTTP method for Jolokia requests (`GET` or `POST`). Equivalent to `-Djolokia.mcp.preferred-http-method=<method>` |
 | `-D*=*` | | System properties |
 
@@ -180,7 +179,6 @@ The system properties that are relevant to the MCP server:
 | System property | Default | Description |
 | --------------- | ------- | ----------- |
 | `quarkus.http.port` | `8080` | (HTTP) The port for the HTTP endpoint |
-| `quarkus.mcp.server.http.root-path` | `mcp` | (HTTP) The root path for the HTTP endpoint (`http://localhost:8080/mcp`) |
 | `jolokia.mcp.url` | `http://localhost:8778/jolokia` | Equivalent to the positional parameter |
 | `jolokia.mcp.preferred-http-method` | Not set | Preferred HTTP method for Jolokia requests (`GET` or `POST`) |
 

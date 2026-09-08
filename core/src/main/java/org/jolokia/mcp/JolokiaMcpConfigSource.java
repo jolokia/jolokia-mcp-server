@@ -56,7 +56,6 @@ public class JolokiaMcpConfigSource implements ConfigSource {
 
         // Set up options
         setupPort();
-        setupRoot();
         setupMethod();
         // Set up HTTP last as other options can affect it
         setupHttp();
@@ -77,19 +76,6 @@ public class JolokiaMcpConfigSource implements ConfigSource {
             int port = Integer.parseInt(configuration.get("port"));
             // System property precedes over the custom option if it's set
             configuration.putIfAbsent(QUARKUS_HTTP_PORT, String.valueOf(port));
-            // HTTP is always enabled when the option is configured
-            configuration.put("http", "true");
-        }
-    }
-
-    /**
-     * Convert --root to `quarkus.mcp.server.http.root-path`.
-     */
-    private static void setupRoot() {
-        if (configuration.containsKey("root")) {
-            String root = configuration.get("root");
-            // System property precedes over the custom option if it's set
-            configuration.putIfAbsent(QUARKUS_MCP_SERVER_HTTP_ROOT_PATH, root);
             // HTTP is always enabled when the option is configured
             configuration.put("http", "true");
         }
