@@ -82,7 +82,7 @@ The following table shows the Jolokia versions compatible with each release of j
 
 | jolokia-mcp-server | Jolokia |
 |--------------------|---------|
-| 0.6.x              | 2.6.1 – 2.6.3 |
+| 0.6.x              | 2.6.1 – 2.6.5 |
 | 0.5.x              | 2.4.3 – 2.6.0 |
 | 0.4.x              | 2.2.9 – 2.4.3 |
 | 0.3.x              | 2.2.8 – 2.2.9 |
