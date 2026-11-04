@@ -95,7 +95,7 @@ The following table shows the Jolokia versions compatible with each release of j
 
 Download the MCP server runner jar:
 
-- [jolokia-mcp-server-0.6.1-runner.jar](https://github.com/jolokia/jolokia-mcp-server/releases/download/v0.6.1/jolokia-mcp-server-0.6.1-runner.jar)
+- [jolokia-mcp-server-0.6.2-runner.jar](https://github.com/jolokia/jolokia-mcp-server/releases/download/v0.6.2/jolokia-mcp-server-0.6.2-runner.jar)
 
 To install the Jolokia MCP server to a MCP host, add the following entry to the MCP settings:
 
@@ -106,7 +106,7 @@ To install the Jolokia MCP server to a MCP host, add the following entry to the 
       "command": "java",
       "args": [
         "-jar",
-        "<path-to-the-runner-jar>/jolokia-mcp-0.6.1-runner.jar"
+        "<path-to-the-runner-jar>/jolokia-mcp-0.6.2-runner.jar"
       ]
     }
   }
@@ -121,7 +121,7 @@ Or if you prefer using [JBang](https://www.jbang.dev/) (no need for downloading 
     "jolokia": {
       "command": "jbang",
       "args": [
-        "org.jolokia.mcp:jolokia-mcp-server:0.6.1:runner"
+        "org.jolokia.mcp:jolokia-mcp-server:0.6.2:runner"
       ]
     }
   }
@@ -132,12 +132,12 @@ Or if you prefer using [JBang](https://www.jbang.dev/) (no need for downloading 
 
 Download the MCP server javaagent jar:
 
-- [jolokia-mcp-agent-jvm-0.6.1-javaagent.jar](https://github.com/jolokia/jolokia-mcp-server/releases/download/v0.6.1/jolokia-mcp-agent-jvm-0.6.1-javaagent.jar)
+- [jolokia-mcp-agent-jvm-0.6.2-javaagent.jar](https://github.com/jolokia/jolokia-mcp-server/releases/download/v0.6.2/jolokia-mcp-agent-jvm-0.6.2-javaagent.jar)
 
 Then run your Java application with `-javaagent` option:
 
 ```console
-java -javaagent:jolokia-mcp-agent-jvm-0.6.1-javaagent.jar -jar your-app.jar
+java -javaagent:jolokia-mcp-agent-jvm-0.6.2-javaagent.jar -jar your-app.jar
 ```
 
 This would open the MCP HTTP transport at <http://localhost:8779/mcp>.
@@ -159,13 +159,13 @@ To register the Jolokia MCP server to a MCP host, add the following entry to the
 Run it with `java -jar`:
 
 ```console
-java -jar jolokia-mcp-server-0.6.1-runner.jar [Jolokia URL]
+java -jar jolokia-mcp-server-0.6.2-runner.jar [Jolokia URL]
 ```
 
-Using JBang, you can directly run it with the Maven GAV (`org.jolokia.mcp:jolokia-mcp-server:0.6.1:runner`):
+Using JBang, you can directly run it with the Maven GAV (`org.jolokia.mcp:jolokia-mcp-server:0.6.2:runner`):
 
 ```console
-jbang org.jolokia.mcp:jolokia-mcp-server:0.6.1:runner
+jbang org.jolokia.mcp:jolokia-mcp-server:0.6.2:runner
 ```
 
 ### HTTP Transport
@@ -173,7 +173,7 @@ jbang org.jolokia.mcp:jolokia-mcp-server:0.6.1:runner
 By default, this MCP server runs with stdio transport. To switch it to HTTP transport, use the `--http` option:
 
 ```console
-java -jar jolokia-mcp-server-0.6.1-runner.jar --http
+java -jar jolokia-mcp-server-0.6.2-runner.jar --http
 ```
 
 The HTTP transport endpoint by default launches at <http://localhost:8080/mcp>.
